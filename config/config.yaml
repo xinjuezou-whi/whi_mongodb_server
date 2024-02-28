@@ -1,3 +1,4 @@
 mongodb:
-  uri: "mongodb://localhost:27017/"
-  db_name: "whi"
+  uri: mongodb://localhost:27017/
+  config: /home/whi/whi_db/mongod.conf
+  db_name: whi_db

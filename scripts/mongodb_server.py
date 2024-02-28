@@ -88,7 +88,7 @@ def start_mongodb():
 
     cmd = [
         'mongod',
-        '-f', '/home/whi/mongodb/mongod.conf'
+        '-f', '/home/whi/whi_db/mongod.conf'
     ]
 
 
