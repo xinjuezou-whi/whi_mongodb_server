@@ -4,6 +4,7 @@ from whi_mongodb_server.srv import MongoQuery, MongoQueryResponse
 import json
 from mongodbhandler import MongoDBHandler
 from datetime import datetime
+import subprocess
 
 class ROSServiceHandler:
     def __init__(self):
@@ -13,7 +14,10 @@ class ROSServiceHandler:
         # 读取参数
         uri = rospy.get_param('~mongodb/uri')
         db_name = rospy.get_param('~mongodb/db_name')
-        # collection_name = rospy.get_param('~mongodb/collection_name')
+        conf = rospy.get_param('~mongodb/conf')
+
+        # 启动 mongodb
+        self.start_mongodb(conf)
 
         # 创建MongoDB处理器
         self.mongo_handler = MongoDBHandler(uri, db_name)
@@ -23,7 +27,13 @@ class ROSServiceHandler:
 
         rospy.loginfo("Initialization completed.")
 
-        
+    def start_mongodb(self, conf):        
+        cmd = [
+            'mongod',
+            '-f', conf
+        ]
+
+        subprocess.Popen(cmd)
 
     def close_video_writer(self):
         if self.video_writer:
@@ -31,7 +41,6 @@ class ROSServiceHandler:
 
 
     def process_db_action(self, req):
-        
         query_str = req.data
         try:
             query_dict = json.loads(query_str)
@@ -87,5 +96,3 @@ class ROSServiceHandler:
 
     def spin(self):
         rospy.spin()
-
-
