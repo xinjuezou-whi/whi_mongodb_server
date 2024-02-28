@@ -35,13 +35,37 @@ pip3 install pymongo
    source ~/.bashrc
    ```
 
-5. Create a path for recording db data. Please do replace <yours> with yours:
+4. Create a path for recording db data. Please do replace <yours> with yours:
 
    ```
    mkdir -p /<yours>/mongodb/data
    mkdir /<yours>/mongodb/logs
    ```
       
+5. Create configure file for MongoDB
+   ```
+   nano /<yours>/mongodb/mongod.conf
+   ```
+
+   Write the following contents:
+   ```
+   storage:
+     dbPath: /<yours>/mongodb/data
+    journal:
+      enabled: true
+
+   systemLog:
+     destination: file
+     logAppend: true
+     path: /<yours>/mongodb/logs/mongod.log
+
+   net:
+     port: 27017
+     bindIp: 0.0.0.0
+   ```
+
+   ctrl-o to save, and ctrl-x to quit
+   
 7. Launching the server and a client
    Open a terminal for the server:
    ```
