@@ -1,6 +1,12 @@
 # whi_mongodb_server
 database server of MongoDB
 
+## Dependency
+```
+pip3 install rospkg
+pip3 install pymongo
+```
+
 ## Install MongoDB on Jetson nano
 1. Go to the official download [website](https://www.mongodb.com/try/download/community). In the "MongoDB Community Server Download" section, select version "3.6.23", platform "Ubuntu 16.04 ARM 64", package "tgz":
    ![image](https://github.com/xinjuezou-whi/whi_mongodb_server/assets/72239958/61a6f480-47d4-4040-85fb-ccaef7c6c8b3)
