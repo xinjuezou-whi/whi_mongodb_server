@@ -23,7 +23,7 @@ pip3 install pymongo
    nano ~/.bashrc
    ```
 
-   Add the following contents before the line of PATH. Please do replace <path_of_extracted> with your extracted path:
+   Add the following contents. Please do replace <path_of_extracted> with your extracted path:
    ```
    # mongodb
    export MONGODB_HOME=<path_of_extracted>/mongodb-linux-aarch64-ubuntu1604-3.6.23
