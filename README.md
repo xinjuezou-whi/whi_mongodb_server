@@ -27,7 +27,7 @@ pip3 install pymongo
    ```
    # mongodb
    export MONGODB_HOME=<path_of_extracted>/mongodb-linux-aarch64-ubuntu1604-3.6.23
-   export PATH=/usr/lib/ccache:$PATH:$MONGODB_HOME/bin
+   export PATH=$MONGODB_HOME/bin:$PATH
    ```
 
    Then, source the bash with command:
