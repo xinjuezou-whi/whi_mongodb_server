@@ -11,13 +11,15 @@ pip3 install pymongo
 1. Go to the official download [website](https://www.mongodb.com/try/download/community). In the "MongoDB Community Server Download" section, select version "3.6.23", platform "Ubuntu 16.04 ARM 64", package "tgz":
    ![image](https://github.com/xinjuezou-whi/whi_mongodb_server/assets/72239958/61a6f480-47d4-4040-85fb-ccaef7c6c8b3)
 
-2. Extract files with the following command:
+   > NOTE: if your Ubuntu is later than 18.04, please select version 7.0.6. Meanwhile, replace the following contents that are related to the selected package
+
+3. Extract files with the following command:
 
    ```
    tar -zxvf mongodb-linux-aarch64-ubuntu1604-3.6.23.tgz
    ```
 
-3. Add the MongoDB's path to environment by editing bashrc:
+4. Add the MongoDB's path to environment by editing bashrc:
    
    ```
    nano ~/.bashrc
@@ -35,14 +37,14 @@ pip3 install pymongo
    source ~/.bashrc
    ```
 
-4. Create a path for recording db data. Please do replace <yours> with yours:
+5. Create a path for recording db data. Please do replace <yours> with yours:
 
    ```
    mkdir -p /<yours>/mongodb/data
    mkdir /<yours>/mongodb/logs
    ```
       
-5. Create configure file for MongoDB
+6. Create configure file for MongoDB
    ```
    nano /<yours>/mongodb/mongod.conf
    ```
