@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <rosparam command="load" file="$(find whi_mongodb_server)/config/config.yaml" />
+  
+  <node pkg="whi_mongodb_server" name="whi_mongodb_server" type="mongodb_server.py" output="screen"/>
+</launch>

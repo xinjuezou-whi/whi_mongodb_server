@@ -10,6 +10,7 @@ def stop_mongodb():
     subprocess.Popen(cmd)
 
 if __name__ == "__main__":
+    print("VERSION 00.03")
     try:
         ros_service_handler = ROSServiceHandler()
         ros_service_handler.spin()

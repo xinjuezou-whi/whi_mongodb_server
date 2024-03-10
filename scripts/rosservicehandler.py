@@ -9,12 +9,12 @@ import subprocess
 class ROSServiceHandler:
     def __init__(self):
         # 初始化节点
-        rospy.init_node('mongo_server')
+        rospy.init_node('whi_mongodb_server')
 
         # 读取参数
-        uri = rospy.get_param('~mongodb/uri')
-        db_name = rospy.get_param('~mongodb/db_name')
-        conf = rospy.get_param('~mongodb/conf')
+        uri = rospy.get_param('~uri')
+        db_name = rospy.get_param('~db_name')
+        conf = rospy.get_param('~conf')
 
         # 启动 mongodb
         self.start_mongodb(conf)
@@ -92,7 +92,7 @@ class ROSServiceHandler:
             return MongoQueryResponse(True, str(result))
         except Exception as e:
             # 如果发生错误，可以返回错误信息
-            return MongoQueryResponse(False, "Error: 指令执行错误")
+            return MongoQueryResponse(False, "Error: Failed to execute command")
 
     def spin(self):
         rospy.spin()
