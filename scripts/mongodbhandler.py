@@ -14,6 +14,19 @@ class MongoDBHandler:
         results = self.db[collection_name].find(query)
         return [str(result) for result in results]
 
+    def find_data_desc(self, collection_name, query):
+        results = self.db[collection_name].find(query).sort('_id', -1)
+        return [str(result) for result in results]
+
+    def find_data_limit(self, collection_name, query):
+        results = self.db[collection_name].find().skip(query["skip"]).limit(query["limit"]).sort('_id', -1)
+        return [str(result) for result in results]
+    
+    def find_count(self, collection_name, query):
+        result = self.db[collection_name].count_documents(query)
+        #results["datacount"] = datacount
+        return str(result)
+
     def update_data(self, collection_name, query, new_values):
         result = self.db[collection_name].update_one(query, {'$set': new_values})
         return str(result.modified_count)

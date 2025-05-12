@@ -9,12 +9,13 @@ import subprocess
 class ROSServiceHandler:
     def __init__(self):
         # 初始化节点
-        rospy.init_node('whi_mongodb_server')
+        rospy.init_node('mongo_server')
 
         # 读取参数
-        uri = rospy.get_param('~uri')
-        db_name = rospy.get_param('~db_name')
-        conf = rospy.get_param('~conf')
+        uri = rospy.get_param('~mongodb/uri')
+        db_name = rospy.get_param('~mongodb/db_name')
+        # collection_name = rospy.get_param('~mongodb/collection_name')
+        conf = rospy.get_param('~mongodb/conf')
 
         # 启动 mongodb
         self.start_mongodb(conf)
@@ -27,13 +28,21 @@ class ROSServiceHandler:
 
         rospy.loginfo("Initialization completed.")
 
-    def start_mongodb(self, conf):        
+    def start_mongodb(self, conf):
+        # cmd = [
+        #     'mongod',
+        #     '--dbpath', '/home/whi/mongodb-home/data',
+        #     '--logpath', '/home/whi/mongodb-home/logs/mongod.log',
+        #     '--fork'
+        # ]
+        
         cmd = [
             'mongod',
             '-f', conf
         ]
 
-        subprocess.Popen(cmd)
+
+        subprocess.Popen(cmd)    
 
     def close_video_writer(self):
         if self.video_writer:
@@ -41,6 +50,7 @@ class ROSServiceHandler:
 
 
     def process_db_action(self, req):
+        
         query_str = req.data
         try:
             query_dict = json.loads(query_str)
@@ -65,6 +75,12 @@ class ROSServiceHandler:
                 result = self.mongo_handler.insert_data(collection_name, query_dict)
             elif action == 'find':
                 result = self.mongo_handler.find_data(collection_name, query_dict)
+            elif action == 'find_desc':
+                result = self.mongo_handler.find_data_desc(collection_name, query_dict)
+            elif action == 'find_limit':
+                result = self.mongo_handler.find_data_limit(collection_name, query_dict)
+            elif action == 'find_count':
+                result = self.mongo_handler.find_count(collection_name, query_dict)
             elif action == 'update':
                 query_criteria = query_dict.get('query', {})
                 new_values = query_dict.get('new_values', {})
@@ -92,7 +108,9 @@ class ROSServiceHandler:
             return MongoQueryResponse(True, str(result))
         except Exception as e:
             # 如果发生错误，可以返回错误信息
-            return MongoQueryResponse(False, "Error: Failed to execute command")
+            return MongoQueryResponse(False, "Error: 指令执行错误")
 
     def spin(self):
         rospy.spin()
+
+
