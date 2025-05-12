@@ -1,4 +1,5 @@
-whi_mongodb_server:
-  uri: mongodb://localhost:27017/
-  conf: /home/whi/whi_db/mongod.conf
-  db_name: whi_db
+mongodb:
+  uri: "mongodb://localhost:27017/"
+  db_name: "whi"
+  conf: "/home/nvidia/Downloads/mongodb/mongod.conf"
+  # collection_name: "test"whiJ
